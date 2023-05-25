@@ -12,11 +12,12 @@ interface Props {
 export const ProductCard: FC<Props> = ({ product }) => {
 
     const [isHovered, setIsHovered] = useState(false);
+    const [isImageLoaded, setisImageLoaded] = useState(false);
 
     const productImage = useMemo(() => {
         return isHovered
-            ? `products/${product.images[1]}`
-            : `products/${product.images[0]}`
+            ? `/products/${product.images[1]}`
+            : `/products/${product.images[0]}`
     }, [isHovered, product.images])
 
     return (
@@ -30,7 +31,7 @@ export const ProductCard: FC<Props> = ({ product }) => {
 
             <Card>
                 <NextLink
-                    href="/product/slug"
+                    href={`/products/${product.slug}`}
                     passHref
                     legacyBehavior
                     prefetch={false}
@@ -42,14 +43,14 @@ export const ProductCard: FC<Props> = ({ product }) => {
                                 className='fadeIn'
                                 image={productImage}
                                 alt={product.title}
-                                onLoad={() => console.log('cargo')}
+                                onLoad={() => setisImageLoaded(true)}
                             />
                         </CardActionArea>
                     </Link>
                 </NextLink>
             </Card>
 
-            <Box sx={{ mt: 1 }} className='fadeIn'>
+            <Box sx={{ mt: 1, display: isImageLoaded ? 'block' : 'none' }} className='fadeIn'>
                 <Typography fontWeight={700}>{product.title}</Typography>
                 <Typography fontWeight={500}>{`$${product.price}`}</Typography>
             </Box>

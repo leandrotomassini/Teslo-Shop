@@ -17,7 +17,7 @@ Renombrar el archivo __.env.template__ a __.env__
 MONGO_URL=mongodb://localhost:27017/teslodb
 ```
 
-## Llenar la base de adtos con información de pruebas
+## Llenar la base de datos con información de pruebas
 
 Llamar a:
 ```http://localhost:3000/api/seed```
