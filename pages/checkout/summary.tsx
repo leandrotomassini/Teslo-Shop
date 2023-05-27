@@ -2,7 +2,7 @@ import NextLink from 'next/link';
 import { Box, Button, Card, CardContent, Divider, Grid, Link, Typography } from '@mui/material';
 
 import { ShopLayout } from '../../components/layouts';
-import { CardList, OrderSummary } from '../../components/cart';
+import { CartList, OrderSummary } from '../../components/cart';
 
 const SummaryPage = () => {
     return (
@@ -16,7 +16,7 @@ const SummaryPage = () => {
             <Grid container spacing={2}>
 
                 <Grid item xs={12} sm={7} sx={{ my: 2 }}>
-                    <CardList />
+                    <CartList />
                 </Grid>
                 <Grid item xs={12} sm={5}>
                     <Card className='summary-card'>

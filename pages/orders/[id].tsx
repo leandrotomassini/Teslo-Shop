@@ -3,7 +3,7 @@ import { CreditCardOffOutlined, CreditScoreOutlined } from '@mui/icons-material'
 import { Box, Card, CardContent, Chip, Divider, Grid, Link, Typography } from '@mui/material';
 
 import { ShopLayout } from '../../components/layouts';
-import { CardList, OrderSummary } from '../../components/cart';
+import { CartList, OrderSummary } from '../../components/cart';
 
 const OrderPage = () => {
     return (
@@ -34,7 +34,7 @@ const OrderPage = () => {
             <Grid container spacing={2}>
 
                 <Grid item xs={12} sm={7} sx={{ my: 2 }}>
-                    <CardList />
+                    <CartList />
                 </Grid>
 
                 <Grid item xs={12} sm={5}>
