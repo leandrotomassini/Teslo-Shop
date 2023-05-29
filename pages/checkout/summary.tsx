@@ -1,10 +1,30 @@
+import { useContext } from 'react';
 import NextLink from 'next/link';
 import { Box, Button, Card, CardContent, Divider, Grid, Link, Typography } from '@mui/material';
 
+import { CartContext } from '../../context';
 import { ShopLayout } from '../../components/layouts';
 import { CartList, OrderSummary } from '../../components/cart';
+import { countries } from '../../utils';
 
 const SummaryPage = () => {
+
+    const { shippingAddress, numberOfItems } = useContext(CartContext);
+
+    if (!shippingAddress)
+        return <></>;
+
+    const {
+        firstName,
+        lastName,
+        address,
+        address2 = '',
+        city,
+        country,
+        phone,
+        zip
+    } = shippingAddress;
+
     return (
         <ShopLayout
             title={'Resumen de orden'}
@@ -22,7 +42,13 @@ const SummaryPage = () => {
                     <Card className='summary-card'>
                         <CardContent>
 
-                            <Typography variant='h2'>Resumen: (3 productos)</Typography>
+                            <Typography variant='h2'>
+                                Resumen: ({
+                                    numberOfItems === 1
+                                        ? 'producto'
+                                        : 'productos'
+                                })
+                            </Typography>
 
                             <Divider sx={{ my: 1 }} />
 
@@ -39,23 +65,24 @@ const SummaryPage = () => {
                             </Typography>
 
                             <Typography>
-                                Homero Simpson
+                                {lastName},  {firstName}
                             </Typography>
 
                             <Typography>
-                                3325 Av. Siempre Viva
+                                {address}
+                                {address2 ? `, ${address2}` : ''}
                             </Typography>
 
                             <Typography>
-                                Styisl. HY2112
+                                {city}, {zip}
                             </Typography>
 
                             <Typography>
-                                Canadá
+                                {countries.find(c => c.code === country)?.name}
                             </Typography>
 
                             <Typography>
-                                +1 558 8558
+                                {phone}
                             </Typography>
 
                             <Divider sx={{ my: 1 }} />
