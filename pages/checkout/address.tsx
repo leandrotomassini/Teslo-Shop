@@ -1,12 +1,12 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { Box, Button, FormControl, Grid, MenuItem, TextField, Typography } from '@mui/material';
 import { useForm } from 'react-hook-form';
+import Cookies from 'js-cookie';
 
 import { CartContext } from '../../context';
 import { ShopLayout } from '../../components/layouts';
 import { countries } from '../../utils';
-import Cookies from 'js-cookie';
 
 type FormData = {
     firstName: string;
@@ -41,10 +41,25 @@ const addressPage = () => {
     const {
         register,
         handleSubmit,
-        formState: { errors }
+        formState: { errors },
+        reset
     } = useForm<FormData>({
-        defaultValues: getAddressFromCookies()
+        defaultValues: {
+            firstName: '',
+            lastName: '',
+            address: '',
+            address2: '',
+            zip: '',
+            city: '',
+            phone: '',
+            country: ''
+        }
     });
+
+    useEffect(() => {
+        reset(getAddressFromCookies());
+    }, [reset]);
+
 
     const onSubmitAddress = (data: FormData) => {
         updateAddress(data);
@@ -152,9 +167,9 @@ const addressPage = () => {
                     <Grid item xs={12} sm={6}>
                         <FormControl fullWidth>
                             <TextField
-                                select
                                 variant='filled'
                                 label="País"
+                                fullWidth
                                 defaultValue={Cookies.get('country') || countries[0].code}
                                 {
                                 ...register('country', {
@@ -162,16 +177,10 @@ const addressPage = () => {
                                 })
                                 }
                                 error={!!errors.country}
+                                helperText={errors.country?.message}
                             >
                                 {
-                                    countries.map(country => (
-                                        <MenuItem
-                                            value={country.code}
-                                            key={country.code}
-                                        >
-                                            {country.name}
-                                        </MenuItem>
-                                    ))
+                                   
                                 }
                             </TextField>
                         </FormControl>

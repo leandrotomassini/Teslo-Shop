@@ -34,6 +34,18 @@ export const authOptions = {
             clientSecret: process.env.GITHUB_SECRET || '',
         }),
     ],
+    pages: {
+        signIn: '/auth/login',
+        newUser: '/auth/register'
+    },
+    jwt: {
+
+    },
+    session: {
+        maxAge: 2592000,
+        strategy: 'jwt',
+        updateAge: 86400
+    },
     callbacks: {
 
         async jwt({ token, account, user }) {
@@ -44,7 +56,11 @@ export const authOptions = {
 
                 switch (account.type) {
                     case 'oauth':
-
+                        token.user = await dbUsers
+                            .oAuthToDbUser(
+                                user.email || '',
+                                user.name || ''
+                            );
                         break;
 
                     case 'credentials':
