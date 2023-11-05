@@ -1,4 +1,6 @@
-.each-slide>div {
+
+
+.each-slide > div {
     display: flex;
     justify-content: center;
     background-size: contain;
