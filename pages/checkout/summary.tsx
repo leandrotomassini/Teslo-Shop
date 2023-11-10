@@ -28,7 +28,7 @@ const SummaryPage = () => {
                                     Editar
                                 </Link>
                             </NextLink>
-                        </Box>
+                           </Box>
 
                         
                         <Typography>Fernando Herrera</Typography>
