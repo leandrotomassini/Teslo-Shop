@@ -5,20 +5,23 @@ import { SWRConfig } from 'swr';
 
 import { lightTheme } from '../themes';
 import { UiProvider } from '../context';
+import { CartProvider } from '../context/cart';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <SWRConfig 
+    <SWRConfig
       value={{
         fetcher: (resource, init) => fetch(resource, init).then(res => res.json())
       }}
     >
-      <UiProvider>
-        <ThemeProvider theme={ lightTheme}>
+      <CartProvider>
+        <UiProvider>
+          <ThemeProvider theme={lightTheme}>
             <CssBaseline />
             <Component {...pageProps} />
-        </ThemeProvider>
-      </UiProvider>
+          </ThemeProvider>
+        </UiProvider>
+      </CartProvider>
     </SWRConfig>
   )
 }
